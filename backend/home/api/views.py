@@ -10,9 +10,9 @@ from products.serializers import ProductSerializer
 @api_view(['GET'])
 def api_home(request,*args,**kwargs):
     data={}
-    model_data=Product.objects.all().order_by("?").first()
-    if model_data:
-        data=model_to_dict(model_data,fields=['id','title','sale_price'])
+    instance=Product.objects.all().order_by("?").first()
+    if instance:
+        data=ProductSerializer(instance).data
     
     # print("body below")
     # print(request.body)
