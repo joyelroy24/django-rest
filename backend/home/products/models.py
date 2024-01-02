@@ -12,6 +12,7 @@ class Product(models.Model):
     
     @property
     def sale_price(self):
+        print(self.price)
         return "%.2f"%(float(self.price)*0.10)
     
     def get_discount(self):

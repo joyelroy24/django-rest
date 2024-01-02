@@ -7,12 +7,14 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 # Create your views here.
 from products.serializers import ProductSerializer
-@api_view(['GET'])
+
+@api_view(['POST'])
 def api_home(request,*args,**kwargs):
     data={}
-    instance=Product.objects.all().order_by("?").first()
-    if instance:
-        data=ProductSerializer(instance).data
+
+    # instance=Product.objects.all().order_by("?").first()
+    # if instance:
+    #     data=ProductSerializer(instance).data
     
     # print("body below")
     # print(request.body)
@@ -35,4 +37,18 @@ def api_home(request,*args,**kwargs):
     # data['content_type']=request.content_type
     
     # data['get_parameter']=request.GET
-    return Response(data)
+
+
+    #inject data
+    data=request.data
+    serializer=ProductSerializer(data=request.data)
+    
+    if serializer.is_valid(raise_exception=True):#return more correct response  like validate like required filed missing.
+        print("^^")
+        print(serializer.validated_data)
+        instance=serializer.save()
+        print(serializer.data)
+        return Response(serializer.data)
+    else:
+        return Response({"invalid":'Not good Data'},status=400)
+

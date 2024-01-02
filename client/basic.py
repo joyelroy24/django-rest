@@ -1,9 +1,9 @@
 import requests
 
 
-endpoint = "http://localhost:8000/api?j=joyel" 
+endpoint = "http://localhost:8000/" 
 
-get_response = requests.get(endpoint,params={"q":'hello'},json={"hai":5,'title':"haa"}) # HTTP Request
+get_response = requests.post(endpoint,params={"q":'hello'},json={"content":5,'title':"haa"}) # HTTP Request
 
 print(get_response.json())
 # print(get_response.json())
