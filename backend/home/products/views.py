@@ -60,3 +60,21 @@ def product_alt_vieW(request,pk=None,*args,**kwargs):
             return Response(serializer.data)
         else:
             return Response({"invalid":'Not good Data'},status=400)
+        
+
+
+class ProductUpdateAPIView(generics.UpdateAPIView):
+    queryset=Product.objects.all()
+    serializer_class=ProductSerializer
+    #lookup_field='pk'
+    def perform_update(self, serializer):
+        instance=serializer.save()
+        instance.price=222
+
+
+class ProductDeleteAPIView(generics.DestroyAPIView):
+    queryset=Product.objects.all()
+    serializer_class=ProductSerializer
+    lookup_field='pk'
+    def perform_destroy(self, instance):
+        return super().perform_destroy(instance)
