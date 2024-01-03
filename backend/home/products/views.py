@@ -5,12 +5,12 @@ from .serializers import ProductSerializer
 
 
 class ProductDetailAPIView(generics.RetrieveAPIView):
-    # queryset=Product.objects.all()
+    queryset=Product.objects.all()
     serializer_class=ProductSerializer
     #lookup_field='pk'
 
 
-class ProductCreateAPIView(generics.CreateAPIView):
+class ProductlistCreateAPIView(generics.ListCreateAPIView):
     queryset=Product.objects.all()
     serializer_class=ProductSerializer
 
@@ -19,7 +19,7 @@ class ProductCreateAPIView(generics.CreateAPIView):
         serializer.save()
 
 
-ProductCreateapiview=ProductCreateAPIView.as_view()#avoid as view on urls.py
+ProductListCreateapiview=ProductlistCreateAPIView.as_view()#avoid as view on urls.py
 
 
 class ProductListAPIView(generics.ListAPIView):

@@ -4,5 +4,5 @@ from . import views
 
 urlpatterns=[
     path('<int:pk>',views.ProductDetailAPIView.as_view()),
-    path('create',views.ProductCreateapiview,name='create')
+    path('create',views.ProductListCreateapiview,name='create')
 ]
