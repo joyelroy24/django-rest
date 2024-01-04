@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics,mixins
 from .models import Product
 from .serializers import ProductSerializer
 from rest_framework.response import Response
@@ -78,3 +78,13 @@ class ProductDeleteAPIView(generics.DestroyAPIView):
     lookup_field='pk'
     def perform_destroy(self, instance):
         return super().perform_destroy(instance)
+    
+
+class productMixinView(mixins.ListModelMixin,
+                       generics.GenericAPIView):
+    queryset=Product.objects.all()
+    serializer_class=ProductSerializer
+    
+
+    def get(self,request,*args,**kwargs):
+        return self.list(request,*args,**kwargs)
