@@ -3,8 +3,9 @@ from .models import Product
 from .serializers import ProductSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-
+from .permissions import IsStaffPermission
 from django.shortcuts import get_object_or_404
+
 
 
 
@@ -18,7 +19,7 @@ class ProductlistCreateAPIView(generics.ListCreateAPIView):
     queryset=Product.objects.all()
     serializer_class=ProductSerializer
     authentication_classes=[authentication.SessionAuthentication]
-    permission_classes=[permissions.DjangoModelPermissions]
+    permission_classes=[IsStaffPermission]
 
     def perform_create(self, serializer):
         title=serializer.validated_data.get('title')
