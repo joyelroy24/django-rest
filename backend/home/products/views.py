@@ -1,4 +1,4 @@
-from rest_framework import generics,mixins,permissions
+from rest_framework import generics,mixins,permissions,authentication
 from .models import Product
 from .serializers import ProductSerializer
 from rest_framework.response import Response
@@ -17,6 +17,8 @@ class ProductDetailAPIView(generics.RetrieveAPIView):
 class ProductlistCreateAPIView(generics.ListCreateAPIView):
     queryset=Product.objects.all()
     serializer_class=ProductSerializer
+    authentication_classes=[authentication.SessionAuthentication]
+    permission_classes=[permissions.DjangoModelPermissions]
 
     def perform_create(self, serializer):
         title=serializer.validated_data.get('title')

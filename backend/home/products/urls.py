@@ -8,5 +8,5 @@ urlpatterns=[
     path('create',views.product_alt_vieW,name='create'),
     path('update/<int:pk>',views.productMixinView.as_view()),
     path('delete/<int:pk>',views.productMixinView.as_view()),
-    path('',views.productMixinView.as_view())
+    path('',views.ProductlistCreateAPIView.as_view())
 ]
