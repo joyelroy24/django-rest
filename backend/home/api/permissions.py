@@ -13,6 +13,7 @@ class IsStaffPermission(permissions.DjangoModelPermissions):
     def has_permission(self, request, view):
         user=request.user
         if not user.is_staff:
+            print("noooo $$$$$$$$$$4")
             return False
         return super().has_permission(request,view)
     #     print(user.get_all_permissions())
